@@ -1,12 +1,18 @@
 // start the express 
 
 const express= require('express');
+const cookieParser= require('cookie-parser');
+const bodyParser= require('body-parser');
 const path = require('path');
 const expressLayouts= require('express-ejs-layouts');
 const port=8000;
 const app= express();
 const db= require('./config/mongoose');
-const datadb= require('./models/data');
+const User= require('./models/user');
+
+
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
 
 app.use(express.static('./assets'));
 
@@ -28,17 +34,17 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 
-datadb({
-    name: "dileep yadav",
-    mobile: 9198743884,
+// User({
+    
 
-    name: "dipak yadav",
-    mobile:455554444445
-
-
+//     email: "yadavdileep557@gmail.com",
+//     password: "Dkyp12@@",
+//     name:" dileep yadav"
 
 
-}).save();
+
+
+// }).save();
 
 
 
