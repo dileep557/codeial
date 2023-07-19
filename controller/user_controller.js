@@ -76,19 +76,18 @@ module.exports.profile = function (req, res) {
 
           });
         }
-        // else{
-        //   console.log("user does not exist go to sing-up");
-        //   return res.redirect('/users/sign_in');
-        //   //console.log("user does not exist go to sing-up");
-        // }
+        else{
+          console.log("user does not exist go to sing-up");
+          return res.redirect('/users/sign_in');
+          //console.log("user does not exist go to sing-up");
+        }
 
 
     }).catch(err=>{
       console.log("error finding in user on profile page", err);
     });
 
-   }
-   else{
+   } else{
     return res.redirect('/users/sign_in');
    }
 
@@ -150,3 +149,11 @@ module.exports.createSession = function (req, res) {
       return res.redirect('back');
     });
 };
+
+
+module.exports.sign_out= function(req ,res){
+
+  res.clearCookie('user_id');
+
+  return res.render('user_signout');
+}
