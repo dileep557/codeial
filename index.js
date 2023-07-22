@@ -1,14 +1,17 @@
 // start the express 
 
-const express= require('express');
-const cookieParser= require('cookie-parser');
-const bodyParser= require('body-parser');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const path = require('path');
-const expressLayouts= require('express-ejs-layouts');
-const port=8000;
-const app= express();
-const db= require('./config/mongoose');
-const User= require('./models/user');
+const expressLayouts = require('express-ejs-layouts');
+const port  =8000;
+const app = express();
+const db = require('./config/mongoose');
+const User = require('./models/user');
+const session = require('express-session');
+const passport= require('passport');
+const passportLocal= require('./config/passport-local-strategy');
 
 
 app.use(express.urlencoded({extended:true}));
@@ -21,8 +24,7 @@ app.use(expressLayouts);
 
 
 
-// use express router
-app.use('/', require('./routes'));
+
 
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
@@ -47,9 +49,28 @@ app.set('views', path.join(__dirname, 'views'));
 // }).save();
 
 
+app.use(session({
+
+    name: 'codeial',   
+    secret: 'blahsomething',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (100*60*100)
+
+    }
+    
+
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 
-
+// use express router
+app.use('/', require('./routes'));
 
 app.listen(port, function(err)
 {

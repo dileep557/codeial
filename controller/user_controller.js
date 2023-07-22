@@ -76,6 +76,8 @@ module.exports.sign_in = function (req, res) {
   return res.render('user_signin');
 };
 
+
+
 module.exports.create = function (req, res) {
   if (req.body.password != req.body.confirm_password) {
     return res.redirect('back');
@@ -99,6 +101,7 @@ module.exports.create = function (req, res) {
 
 module.exports.createSession = function (req, res) {
   // Implement the logic for creating a session
-};
 
+  return res.redirect('/');
+};
 
