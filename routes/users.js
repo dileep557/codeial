@@ -32,6 +32,9 @@ router.post('/create-session', (req, res, next) => {
 }, userController.createSession);
 
 
+router.get('/sign-out', userController.destroySession);
+
+
 
 
 

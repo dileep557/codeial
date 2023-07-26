@@ -12,6 +12,23 @@ const User = require('./models/user');
 const session = require('express-session');
 const passport= require('passport');
 const passportLocal= require('./config/passport-local-strategy');
+const MongoStore= require('connect-mongodb-session')(session); // import mongo session 
+// store session-cookie  in mongodatabase 
+var store = new MongoStore(
+    {
+      uri: 'mongodb://127.0.0.1:27017/codeial_development',
+      databaseName: 'codeial_development',
+      collection: 'User'
+    },
+    function(error) {
+      // Should have gotten an error
+      console.log(error);
+    });
+  
+  // Catch errors
+  store.on('error', function(error) {
+    console.log(error);
+  });
 
 
 app.use(express.urlencoded({extended:true}));
@@ -58,7 +75,10 @@ app.use(session({
     cookie: {
         maxAge: (100*60*100)
 
-    }
+    },
+    store: store,
+   
+
     
 
 }));

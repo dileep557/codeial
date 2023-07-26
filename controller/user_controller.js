@@ -124,3 +124,17 @@ module.exports.createSession = function (req, res) {
   return res.redirect('/');
 };
 
+
+exports.destroySession = function (req, res) {
+  // Code to handle user logout and destroy the session goes here
+  // For example:
+  req.logout(function(err) {
+    if (err) { return next(err); }
+  });
+  return res.redirect('/'); // Redirect to the home page or any other page after logout
+};
+
+
+
+
+
