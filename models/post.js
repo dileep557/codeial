@@ -13,7 +13,20 @@ user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
 },
+
+comments: [{ // include array of id's of all comments in post schema
+
+
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+
+
+}]
+
+
 },
+
+
 
 {
     timestamps: true
