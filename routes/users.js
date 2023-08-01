@@ -8,21 +8,16 @@ const userController= require('../controller/user_controller');
 
 //console.log("router is loaded");
 
-router.get('/profile',passport.checkAuthentication, userController.profile);
-router.get('/sign_up', userController.sign_up);
+router.get('/profile/:id',passport.checkAuthentication, userController.profile);
+//router.post('/update/:id',passport.checkAuthentication, userController.update);
+
+
+router.get('/sign_up', userController.sign_up);// the first parameter is url path and second is callback to handle to the verious controls
 router.get('/sign_in', userController.sign_in);
 router.post('/create', userController.create);
 
 
-//use passport as middlewhere to authenticate
 
-// router.post('/create-session', passport.authenticate(
-//     'local',
-//     {
-//       successRedirect: '/users/profile'
-//     },
-//       {  failureRedirect: '/users/sign_in' }
-// )  , userController.createSession);
 
 router.post('/create-session', (req, res, next) => {
   passport.authenticate('local', {

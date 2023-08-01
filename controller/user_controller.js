@@ -1,74 +1,39 @@
-
-// const User= require('../models/user');
-
-// // render profile page controller
-// module.exports.profile= function (req,res){
-//     return res.render('profile')
-
-    
-// };
-
-// ///render singn- up page
-// module.exports.sign_up= function (req,res){
-//     return res.render('user_signup');
-
-    
-// } 
-
-// //render signin page
-// module.exports.sign_in= function (req,res){
-//     return res.render('user_signin');
-
-    
-// }
-
-
-// module.exports.create=function(req, res){
-
-//     if(req.body.password!=req.body.confirm_password)
-//     {
-//         return res.redirect('back');
-//     }
-
-//     User.findOne({email: req.body.email}, function(err, user){
-//         if(err){
-//             console.log(" find error to finding email while signup");
-//             return;
-//         }
-
-//         if(!user)
-//         {
-//             User.create(req.body, function(err, user){
-//                 if(err){ console.log(" find error to finding email while creating user"); return;}
-
-//                 return res.redirect('/users/sign_in');
-//             })
-//         }
-
-//         else{
-//             return res.redirect('back');
-
-//         }
-
-//     });
-
-// }
-
-
-
-
-// module.exports.createSession=function(req, res){
-    
-// }
-
-
 const User = require('../models/user');
 
 module.exports.profile = function (req, res) {
-  return res.render('profile', {
-    title : 'profile page'
+
+  User.findById(req.params.id).then(user=>{
+    return res.render('profile', {
+      title : 'profile page',
+      user_profile: user
+    });
+
+  }).catch(err=>{
+    console.log("error show profile in list",err);
   });
+ 
 };
+
+
+
+// module.exports.update= function(req,res)
+// {
+//   if(req.user.id==req.params.id)
+//   { 
+
+//     User.findByIdAndDelete(req.params.id , req.body).then(user).catch(err)
+//       return res.redirect('back')
+    
+
+
+//   }
+//   else{
+//     return res.status(401).send('unathorised');
+//   }
+
+
+
+// }
 
 module.exports.sign_up = function (req, res) {
 

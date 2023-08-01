@@ -1,7 +1,5 @@
      <h1>codeial / <%= title %> </h1>
-
-
-    <section id="feed-posts">
+      <section id="feed-posts">
 
         <h2>Post</h2>
 
@@ -21,62 +19,13 @@
 
             <ul>
 
+               
+
                 <% for(post of posts) { %>
-                    <li>
+ 
+                    <%- include('_post') -%> 
 
-                           <p>
-                            <h1 style="color: black;"><%= post.content %><br></h1>  
-                            <h1 style="color: lightblue;"><%= post.user.name %></h1>
-
-                           </p> 
-
-                           <div  id="post-comment">
-
-                            <% if(locals.user) { %>
-                              <form action="/comments/create" method="Post" >
-                               <input type="text" name="content" placeholder=" type here to add comment... " required >
-                               <input type="hidden" name="post"  value="<%= post._id %>">
-                               <input type="submit" value="Add comment">
-
-
-
-                              </form> 
-
-                            <% } %>
-                            <p> comments:</p>
-                             
-                            <div id="post-comment-list">
-                                <ul id="post-comment-<%= post._id %>">
-                                  <% for(comment of post.comments) { %>
-                                    <p>
-
-                                       
-                                        <%= comment.content %> 
-                                        <br> 
-                                        <small>
-                                            <%= comment.user.name %> 
-                                        </small>
-                                    </p>
-
-
-
-
-                                <% } %>
-
-
-                                </ul>
-                            </div>
-
-
-        </div>
-
-
-                    </li>
-
-
-                    
-
-            <% } %>
+                 <% } %>
 
 
 
@@ -89,8 +38,24 @@
 
         </div>
 
+   </section>
+
+    <section id="user-friends">
+        <h3> Friends: </h3>
+
+        <% for(u of all_users) { %>
+
+        <p>
+            <a style="margin-left: 20px;" href="/users/profile/<%= u.id %>"><%=u.name %></a>
 
 
+
+        </p>
+
+
+
+        <% } %>
+             
 
 
     </section>
