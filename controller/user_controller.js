@@ -16,24 +16,24 @@ module.exports.profile = function (req, res) {
 
 
 
-// module.exports.update= function(req,res)
-// {
-//   if(req.user.id==req.params.id)
-//   { 
+module.exports.update= function(req,res)
+{
+  if(req.user.id==req.params.id)
+  { 
 
-//     User.findByIdAndDelete(req.params.id , req.body).then(user).catch(err)
-//       return res.redirect('back')
+    User.findByIdAndUpdate(req.params.id , req.body).then().catch()
+      return res.redirect('back')
     
 
 
-//   }
-//   else{
-//     return res.status(401).send('unathorised');
-//   }
+  }
+  else{
+    return res.status(401).send('unathorised');
+  }
 
 
 
-// }
+}
 
 module.exports.sign_up = function (req, res) {
 

@@ -9,7 +9,7 @@ const userController= require('../controller/user_controller');
 //console.log("router is loaded");
 
 router.get('/profile/:id',passport.checkAuthentication, userController.profile);
-//router.post('/update/:id',passport.checkAuthentication, userController.update);
+router.post('/update/:id',passport.checkAuthentication, userController.update);
 
 
 router.get('/sign_up', userController.sign_up);// the first parameter is url path and second is callback to handle to the verious controls
