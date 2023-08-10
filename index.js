@@ -12,7 +12,12 @@ const User = require('./models/user');
 const session = require('express-session');
 const passport= require('passport');
 const passportLocal= require('./config/passport-local-strategy');
-const MongoStore= require('connect-mongodb-session')(session); // import mongo session 
+const MongoStore= require('connect-mongodb-session')(session); // import mongo session
+const flash= require('connect-flash');
+const Mwere= require('./config/Mware');
+
+
+
 // store session-cookie  in mongodatabase 
 var store = new MongoStore(
     {
@@ -87,6 +92,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(Mwere.setFlash);
 
 
 // use express router

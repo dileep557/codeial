@@ -43,6 +43,7 @@ module.exports.sign_up = function (req, res) {
     return res.redirect('/users/profile');
   }
 
+  // req.flash('error','user already exist !');
   return res.render('user_signup', {
     title: 'sign-up page'
   });
@@ -79,12 +80,16 @@ module.exports.create = function (req, res) {
     })
     .catch(err => {
       console.error(err);
+      req.flash('error','user already exist !');
+
       return res.redirect('back');
     });
 };
 
 module.exports.createSession = function (req, res) {
   // Implement the logic for creating a session
+
+  req.flash('success', 'logged in successfully!');
 
   return res.redirect('/');
 };
@@ -93,9 +98,12 @@ module.exports.createSession = function (req, res) {
 exports.destroySession = function (req, res) {
   // Code to handle user logout and destroy the session goes here
   // For example:
+  req.flash('success', 'logged out successfully!');
   req.logout(function(err) {
     if (err) { return next(err); }
   });
+
+  req.flash('success', 'logged out successfully!');
   return res.redirect('/'); // Redirect to the home page or any other page after logout
 };
 

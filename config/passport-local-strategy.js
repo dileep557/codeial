@@ -45,7 +45,7 @@
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user')
+const User = require('../models/user');
 
 passport.use(new LocalStrategy({
   usernameField: 'email',
@@ -55,17 +55,17 @@ passport.use(new LocalStrategy({
     try {
       let user = await User.findOne({ email: email })
       if (!user) {
-       // req.flash('error', 'invalid username // password');
+       req.flash('error', 'invalid username // password');
         return done(null, false);
       }
       if (user.password != password) {
-       // req.flash('error', 'invalid password');
+        req.flash('error', 'invalid password');
         return done(null, false);
       }
 
       return done(null, user);
     } catch (err) {
-   //   req.flash('error', err);
+   req.flash('error', err);
       return done(err);
     }
 
@@ -96,7 +96,7 @@ passport.checkAuthentication = function (req, res, next)
   if (req.isAuthenticated()) {
     return next();
   }
-  //req.flash('error', 'You are not Authorize plz sign in !');
+  req.flash('error', 'You are not Authorize plz sign in !');
   return res.redirect('/users/sign_in');
 }
 
