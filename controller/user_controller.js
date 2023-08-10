@@ -103,7 +103,7 @@ exports.destroySession = function (req, res) {
     if (err) { return next(err); }
   });
 
-  req.flash('success', 'logged out successfully!');
+ // req.flash('success', 'logged out successfully!');
   return res.redirect('/'); // Redirect to the home page or any other page after logout
 };
 
